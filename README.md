@@ -1,6 +1,8 @@
 # Ruh Sağlığı Acil Servisi — Triyaj ve Kapasite Planlama DSS
 
-Bu proje, yüksek yoğunluklu psikiyatri acil servislerinde hasta akışını, triyaj süreçlerini ve kaynak yönetimini optimize etmek amacıyla geliştirilmiş bir **Karar Destek Sistemi (DSS)** ve **Kesikli Olay Simülasyonu ** uygulamasıdır.
+Bu proje, yüksek yoğunluklu psikiyatri acil servislerinde hasta akışını, triyaj süreçlerini ve kaynak yönetimini optimize etmek amacıyla geliştirilmiş bir **Karar Destek Sistemi (DSS)** ve **Kesikli Olay Simülasyonu** uygulamasıdır.
+
+![Psikiyatri Acil Servisi Karar Destek Sistemi paneli](report_images/image3.png)
 
 ## 📌 Projenin Amacı
 
@@ -16,7 +18,21 @@ Ruh sağlığı acil servisleri, kriz düzeylerine göre hızlı ve hassas müda
 - **Vazgeçme (Reneging) Analizi:** Bekleme toleransını aşan hastaların sistemi terk etme oranları matematiksel olarak izlenir.
 - **Gerçek Zamanlı Dashboard:** Simülasyon çıktıları (bekleme süreleri, kuyruk uzunluğu, doktor doluluk oranları) anlık grafiklerle görselleştirilir.
 
-##  Kullanılan Teknolojiler
+## Örnek Senaryolar
+
+Sol paneldeki parametreler değiştikçe sonuçlar değişir. Rapor için alınan üç örnek çalıştırma:
+
+| Senaryo | Ort. hasta geliş (dk) | Triyaj hemşiresi | Psikiyatrist | Psikolog | Gelen hasta | Ayrılan | Ort. bekleme |
+|---|---|---|---|---|---|---|---|
+| Rahat kapasite | 16,5 | 3 | 2 | 4 | 83 | 0 | 10,74 dk |
+| Sınırlı kapasite | 11,5 | 2 | 1 | 2 | 111 | 0 | 160,28 dk |
+| Aşırı yoğun | 4 | 2 | 1 | 2 | 385 | 16 | 475,59 dk |
+
+Aşırı yoğun senaryoda bekleme toleransını aşan 16 hasta sistemi terk ediyor:
+
+![Aşırı yoğun senaryo](report_images/image5.png)
+
+## Kullanılan Teknolojiler
 
 **Backend (Simülasyon ve API Katmanı):**
 
@@ -34,19 +50,22 @@ Ruh sağlığı acil servisleri, kriz düzeylerine göre hızlı ve hassas müda
 
 ---
 
-##  Kurulum ve Çalıştırma Rehberi
+## Kurulum ve Çalıştırma Rehberi
 
-## Projeyi kendi bilgisayarınızda çalıştırmak için aşağıdaki adımları izleyebilirsiniz.
+Projeyi kendi bilgisayarınızda çalıştırmak için aşağıdaki adımları izleyebilirsiniz.
 
 ### 1. Repoyu Klonlayın
 
 ```bash
-git clone https://github.com/YusufGK41/psikiyatri-sim.git
+git clone https://github.com/yusufgurkan/psikiyatri-sim.git
 cd psikiyatri-sim
+```
 
-Backend Sunucusunu Başlatın
+### 2. Backend Sunucusunu Başlatın
+
 Yeni bir terminal açın ve sırasıyla şu komutları girin:
 
+```bash
 cd backend
 python -m venv venv
 # Sanal ortamı aktif edin (Windows için):
@@ -55,22 +74,22 @@ venv\Scripts\activate
 
 pip install -r requirements.txt
 uvicorn main:app --reload
+```
 
+### 3. Frontend Arayüzünü Başlatın
 
-Frontend Arayüzünü Başlatın
 Yeni bir terminal daha açın ve şu komutları girin:
 
-
+```bash
 cd frontend
 npm install
 npm run dev
 ```
 
- Geliştirici Ekibi
+## Geliştirici Ekibi
+
 Bu proje takım çalışmasıyla aşağıdaki görev dağılımına göre geliştirilmektedir:
 
-Yusuf Gürkan: Proje Lideri & Sistem Entegrasyonu
-
-Ömer Faruk Yalçınkaya: Backend Geliştirme & SimPy Mantığı
-
-Kaan Gerçek: Frontend Geliştirme & Veri Görselleştirme
+- **Yusuf Gürkan:** Proje Lideri & Sistem Entegrasyonu
+- **Ömer Faruk Yalçınkaya:** Backend Geliştirme & SimPy Mantığı
+- **Kaan Gerçek:** Frontend Geliştirme & Veri Görselleştirme
